@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <math.h>
 
-#ifdef __APPLE__
-#include <OpenCL/opencl.h>
-#else
-#include <CL/cl.h>
-#endif
+//#ifdef __APPLE__
+//#include <OpenCL/opencl.h>
+//#else
+//#include <CL/cl.h>
+//#endif
 
 #ifdef AOCL
 #include "CL/opencl.h"
@@ -60,17 +60,17 @@ int main()
     int wD = wB;
     int hD = hA;
 
-#ifdef __APPLE__
-    /* Get Platform and Device Info */
-    clGetPlatformIDs(1, NULL, &platformCount);
-    platforms = (cl_platform_id*) malloc(sizeof(cl_platform_id) * platformCount);
-    clGetPlatformIDs(platformCount, platforms, NULL);
-    // we only use platform 0, even if there are more plantforms
-    // Query the available OpenCL device.
-    ret = clGetDeviceIDs(platforms[0], CL_DEVICE_TYPE_DEFAULT, 1, &device_id, &ret_num_devices);
-    ret = clGetDeviceInfo(device_id, CL_DEVICE_NAME, DEVICE_NAME_LEN, dev_name, NULL);
-    printf("device name= %s\n", dev_name);
-#else
+//#ifdef __APPLE__
+//    /* Get Platform and Device Info */
+//    clGetPlatformIDs(1, NULL, &platformCount);
+//    platforms = (cl_platform_id*) malloc(sizeof(cl_platform_id) * platformCount);
+//    clGetPlatformIDs(platformCount, platforms, NULL);
+//    // we only use platform 0, even if there are more plantforms
+//    // Query the available OpenCL device.
+//    ret = clGetDeviceIDs(platforms[0], CL_DEVICE_TYPE_DEFAULT, 1, &device_id, &ret_num_devices);
+//    ret = clGetDeviceInfo(device_id, CL_DEVICE_NAME, DEVICE_NAME_LEN, dev_name, NULL);
+//    printf("device name= %s\n", dev_name);
+//#else
 
 #ifdef AOCL  /* Altera FPGA */
     // get all platforms
@@ -100,25 +100,25 @@ int main()
     /* Create Command Queue */
     command_queue = clCreateCommandQueue(context, device_id, 0, &ret);
 
-#ifdef __APPLE__
-    /* Load the source code containing the kernel*/
-    fp = fopen(fileName, "r");
-    if (!fp) {
-      fprintf(stderr, "Failed to load kernel.\n");
-      exit(1);
-    }
-    source_str = (char*)malloc(MAX_SOURCE_SIZE);
-    source_size = fread(source_str, 1, MAX_SOURCE_SIZE, fp);
-    fclose(fp);
-
-    /* Create Kernel Program from the source */
-    program = clCreateProgramWithSource(context, 1, (const char **)&source_str,
-              (const size_t *)&source_size, &ret);
-    if (ret != CL_SUCCESS) {
-      printf("Failed to create program from source.\n");
-      exit(1);
-    }
-#else
+//#ifdef __APPLE__
+//    /* Load the source code containing the kernel*/
+//    fp = fopen(fileName, "r");
+//    if (!fp) {
+//      fprintf(stderr, "Failed to load kernel.\n");
+//      exit(1);
+//    }
+//    source_str = (char*)malloc(MAX_SOURCE_SIZE);
+//    source_size = fread(source_str, 1, MAX_SOURCE_SIZE, fp);
+//    fclose(fp);
+  
+//    /* Create Kernel Program from the source */
+//    program = clCreateProgramWithSource(context, 1, (const char **)&source_str,
+//              (const size_t *)&source_size, &ret);
+//    if (ret != CL_SUCCESS) {
+//      printf("Failed to create program from source.\n");
+//      exit(1);
+//    }
+//#else
 
 #ifdef AOCL  /* on FPGA we need to create kernel from binary */
    /* Create Kernel Program from the binary */
