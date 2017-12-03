@@ -1,0 +1,198 @@
+Boardtest usage information
+Usage: boardtest_host [--device d] [--test t] 
+	--device d: device number (0 - NUM_DEVICES-1) 
+	--test t: test number (0 - 7) 
+	(default is running all tests on all devices)
+Total number of devices = 1. 
+Running all tests. 
+Running on all devices. 
+Program object created for all devices. 
+Program built for all devices. 
+
+*****************************************************************
+********************** TEST FOR DEVICE 0 ***********************
+*****************************************************************
+
+
+*****************************************************************
+*********************** Host Speed Test *************************
+*****************************************************************
+
+clGetDeviceInfo CL_DEVICE_GLOBAL_MEM_SIZE = 4294967296
+clGetDeviceInfo CL_DEVICE_MAX_MEM_ALLOC_SIZE = 4293918720
+Memory consumed for internal use = 1048576
+Actual maximum buffer size = 4293918720 bytes
+Writing 4095 MB to global memory ... 1901.974891 MB/s
+Reading 4293918720 bytes from global memory ... 3040.423104 MB/s
+Verifying data ...
+Successfully wrote and readback 4095 MB buffer
+
+Transferring 8192 KBs in 256 32 KB blocks ...
+Transferring 8192 KBs in 128 64 KB blocks ...
+Transferring 8192 KBs in 64 128 KB blocks ...
+Transferring 8192 KBs in 32 256 KB blocks ...
+Transferring 8192 KBs in 16 512 KB blocks ...
+Transferring 8192 KBs in 8 1024 KB blocks ...
+Transferring 8192 KBs in 4 2048 KB blocks ...
+Transferring 8192 KBs in 2 4096 KB blocks ...
+Transferring 8192 KBs in 1 8192 KB blocks ...
+
+PCIe Gen2.0 peak speed: 500MB/s/lane
+
+Block_Size Avg Max Min End-End (MB/s)
+Writing 8192 KBs with block size (in bytes) below:
+   32768 605.03 683.21 439.11 547.37
+   65536 855.44 965.35 195.47 818.51
+  131072 1127.63 1215.41 951.25 1083.22
+  262144 1341.37 1431.82 1259.54 1314.52
+  524288 1351.74 1403.12 1327.01 1332.12
+ 1048576 1568.49 1601.45 1542.76 1555.33
+ 2097152 1744.76 1761.06 1733.20 1733.24
+ 4194304 1906.13 1916.49 1895.89 1902.93
+ 8388608 1991.90 1991.90 1991.90 1991.90
+Reading 8192 KBs with block size (in bytes) below:
+   32768 836.78 907.42 653.70 736.39
+   65536 1146.67 1188.45 1110.08 1081.61
+  131072 1540.34 1672.63 1285.89 1485.03
+  262144 1842.74 1994.92 1706.30 1787.86
+  524288 2024.96 2173.57 1948.09 1977.80
+ 1048576 2205.40 2317.69 2107.55 2176.20
+ 2097152 2564.12 2602.05 2520.03 2540.59
+ 4194304 2846.41 2864.97 2828.10 2840.74
+ 8388608 2986.74 2986.74 2986.74 2986.74
+
+Host write top speed = 1991.90 MB/s
+Host read top speed = 2986.74 MB/s
+
+
+HOST-TO-MEMORY BANDWIDTH = 2489 MB/s
+
+
+*****************************************************************
+********************* Host Read Write Test **********************
+*****************************************************************
+
+--- test_rw with device ptr offset 3
+** WARNING: [acl0] NOT using DMA to transfer 1024 bytes from host to device because of lack of alignment
+**                 host ptr (0x985845) and/or dev offset (0x10003) is not aligned to 64 bytes
+** WARNING: [acl0] NOT using DMA to transfer 1024 bytes from device to host because of lack of alignment
+**                 host ptr (0x987148) and/or dev offset (0x10003) is not aligned to 64 bytes
+--- test_rw with device ptr offset 0
+** WARNING: [acl0] NOT using DMA to transfer 1024 bytes from host to device because of lack of alignment
+**                 host ptr (0x987145) and/or dev offset (0x10000) is not aligned to 64 bytes
+** WARNING: [acl0] NOT using DMA to transfer 1024 bytes from device to host because of lack of alignment
+**                 host ptr (0x985848) and/or dev offset (0x10000) is not aligned to 64 bytes
+
+HOST READ-WRITE TEST PASSED!
+
+*****************************************************************
+*******************  Kernel Clock Frequency Test  ***************
+*****************************************************************
+
+Measured Frequency 		= 	290.379761 MHz. 
+Quartus Compiled Frequency 	= 	290.690002 MHz. 
+
+Measured Clock frequency is within 2 percent of quartus compiled frequency. 
+
+
+*****************************************************************
+********************* Kernel Launch Test ************************
+*****************************************************************
+
+Launching kernel kernel_sender ...
+Launching kernel kernel_receiver ...
+  ... Waiting for sender
+  Sender sent the token to receiver
+  ... Waiting for receiver
+
+KERNEL_LAUNCH_TEST PASSED
+
+
+*****************************************************************
+********************  Kernel Latency   **************************
+*****************************************************************
+
+Creating kernel (nop)
+  OpenCL Notification Callback: [Runtime Warning]: Too many 'event' objects in the host. This causes deterioration in runtime performance
+Processed 10000 kernels in 184.3994 ms
+Single kernel round trip time = 18.4399 us
+Throughput = 54.2301 kernels/ms
+Kernel execution is complete.
+
+*****************************************************************
+*************  Kernel-to-Memory Read Write Test   ***************
+*****************************************************************
+
+Launching kernel mem_read_writestream ...
+clGetDeviceInfo CL_DEVICE_MAX_MEM_ALLOC_SIZE = 4293918720 bytes.
+Available max buffer size = 4293918720 bytes.
+Created kernel buffer. 
+Finished initializing host vectors.  
+Finished writing to buffers. 
+Finished initializing host vectors.  
+Finished writing to buffers. 
+Finished setting kernel args. 
+Kernel executed. 
+Finished Reading buffer. 
+Finished Reading buffer. 
+KERNEL MEMORY READ WRITE TEST PASSED. 
+
+*****************************************************************
+*****************  Kernel-to-Memory Bandwidth   *****************
+*****************************************************************
+
+clGetDeviceInfo CL_DEVICE_MAX_MEM_ALLOC_SIZE = 4293918720 bytes.
+Available max buffer size = 4293918720 bytes.
+Size of memory bank 1 = 0x80000000 B
+Size of memory bank 2 = 0x80000000 B
+
+Performing kernel transfers of 1023 MBs on the default global memory (address starting at 0) 
+  Note: This test assumes that design was compiled with --no-interleaving 
+
+Launching kernel mem_writestream ...
+Launching kernel mem_readstream ...
+Launching kernel mem_read_writestream ...
+
+Summarizing bandwidth in MB/s/bank for banks 1 to 8
+ 18571  18563  18553  18585  18568  18563  18564  18575  mem_writestream
+ 18111  18110  18111  18128  18130  18110  18124  18113  mem_readstream
+ 20863  20885  20837  20892  20886  20919  20879  20879  mem_read_writestream
+
+Name of the global memory type not found in the board_spec. 
+Number Of Interfaces 			:	 2 
+Max Bandwidth (all memory interfaces)	:	 25600 MB/s 
+Max Bandwidth of 1 memory interface	:	 12800 MB/s 
+
+It is assumed that all memory interfaces have equal widths. 
+
+BOARD BANDWIDTH UTILIZATION = 149.91% 
+
+  Kernel mem bandwidth assuming ideal memory: 37169 MB/s
+              * If this is lower than your board's peak memory
+              * bandwidth then your kernel's clock isn't fast enough
+              * to saturate memory
+              *   approx. fmax = 290
+
+Kernel mem bandwidth assuming ideal memory is greater than board's peak memory bandwidth. Success.
+
+
+KERNEL-TO-MEMORY BANDWIDTH = 19188 MB/s/bank
+
+*****************************************************************
+*********************** Cache Snoop Test ************************
+*****************************************************************
+
+Created Kernel reorder_const ...
+  Min time:       23440
+  Max time:      104922
+  Avg time:       31480
+ Finished 4000 iterations with 0 errors
+
+SNOOP TEST PASSED
+
+*****************************************************************
+**************** TEST COMPLETED FOR DEVICE 0 *******************
+*****************************************************************
+
+
+BOARDTEST PASSED
